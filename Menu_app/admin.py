@@ -1,3 +1,5 @@
 from django.contrib import admin
+from menu_app.models import Menu, Dish
 
-# Register your models here.
+myModels = [Menu, Dish]
+admin.site.register(myModels)
