@@ -4,6 +4,7 @@ from menu_app import views
 urlpatterns = [
     path('menu_app/', views.index, name='index'),
     path('menu_add/', views.menu_add, name="menu_add"),
-    path('dishes_add/', views.dishes_add, name="dishes_add")
-
+    path('dishes_add/', views.dishes_add, name="dishes_add"),
+    path('delete/<int:id>/', views.DeleteMenu, name='DeleteMenu'),
+    path('<int:id>/', views.UpdateMenu, name='UpdateMenu'),
 ]
