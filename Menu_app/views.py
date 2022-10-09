@@ -2,11 +2,17 @@ from django.shortcuts import render, redirect
 from menu_app import models
 from .forms import DishesForm, MenuForm
 from django.contrib import messages
+from django.views.generic import ListView
 
 
 def index(request):
-    menus = models.Menu.objects.all()
-    return render(request, 'index.html', {"menus": menus, })
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            menus = models.Menu.objects.filter(name=query)
+        else:
+            menus = models.Menu.objects.all()
+        return render(request, 'index.html', {"menus": menus, })
 
 
 def menu_add(request):
@@ -58,3 +64,9 @@ def UpdateMenu(request, id=0):
         if form.is_valid():
             form.save()
         return redirect('/menu_app')
+
+
+class MenuListView(ListView):
+    paginate_by = 2
+    queryset = models.Menu.objects.all()
+    template_name = 'index.html'

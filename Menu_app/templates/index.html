@@ -46,6 +46,17 @@
             background-size: cover;
             opacity: 0, 5;
         }
+
+        .white-text-with-black-shadow {
+            text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+            color: white;
+            font: 1em Georgia, serif;
+        }
+
+        h1 {
+
+            text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+        }
     </style>
     <title>Menu</title>
 </head>
@@ -70,6 +81,13 @@
                         <a href="{% url 'dishes_add' %}" class="nav-link">Dishes add</a>
                     </li>
                 </ul>
+                <form class="form-inline " action="{% url 'index' %}">
+                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search"
+                        aria-label="search">
+                    <button type="submit" class="btn btn-link">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -85,7 +103,8 @@
                 <div class="overlay-image" style="background-image: url('{% static 'images/danie2.jpg' %}')" ;>
                     <div class="container">
                         <h1>List Menu</h1>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                        <p class="white-text-with-black-shadow">Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
                             galley of type and scrambled it to make a type specimen book. It has survived not only five
                             centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
@@ -99,7 +118,8 @@
                 <div class="overlay-image" style="background-image: url('{% static 'images/danie1.jpg' %}')" ;>
                     <div class="container">
                         <h1>Add Menu</h1>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                        <p class="white-text-with-black-shadow">Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
                             galley of type and scrambled it to make a type specimen book. It has survived not only five
                             centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
@@ -114,7 +134,8 @@
                 <div class="overlay-image" style="background-image: url('{% static 'images/danie3.jpg' %}')" ;></div>
                 <div class="container">
                     <h1>Add Dishes</h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    <p class="white-text-with-black-shadow">Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
                         but also the leap into electronic typesetting, remaining essentially unchanged. It was
@@ -165,8 +186,13 @@
         </tr>
         {% endfor %}
 
-
     </table>
-
+    {% for menu in object_list %}
+    <li style="margin-left:10px;">{{menu.name}}</li>
+    {% endfor %}
+    <br>
+    <div>
+        Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    </div>
 
 </html>
