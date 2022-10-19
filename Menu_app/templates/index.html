@@ -82,8 +82,7 @@
                     </li>
                 </ul>
                 <form class="form-inline " action="{% url 'index' %}">
-                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search"
-                        aria-label="search">
+                    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="search">
                     <button type="submit" class="btn btn-link">
                         <i class="fas fa-search"></i>
                     </button>
@@ -187,26 +186,18 @@
         {% endfor %}
 
     </table>
-    {% for menu in page_obj %}
-    ...
-    {% endfor %}
-
-    <div class="pagination">
-        <span class="step-links">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            </li>
             {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a></li>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
 
 </html>

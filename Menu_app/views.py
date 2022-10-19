@@ -7,14 +7,15 @@ from django.urls import reverse
 
 # old approach
 
-# def index(request):
-#     if request.method == 'GET':
-#         query = request.GET.get('query')
-#         if query:
-#             menus = models.Menu.objects.filter(name__icontains=query)
-#         else:
-#             menus = models.Menu.objects.all()
-#         return render(request, 'index.html', {"menus": menus, })
+
+def index(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            menus = models.Menu.objects.filter(name__icontains=query)
+        else:
+            menus = models.Menu.objects.all()
+        return render(request, 'index.html', {"menus": menus, })
 
 
 # def menu_add(request):
@@ -68,10 +69,19 @@ from django.urls import reverse
 #         return redirect('/menu_app')
 
 
-class index(ListView):
-    queryset = models.Menu.objects.all()
+class Index(ListView):
+    model = models.Menu
     context_object_name = 'menus'
     template_name = 'index.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        q = self.request.GET.get('q')
+        if q:
+            object_list = self.model.objects.filter(name__icontains=q)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
 
 
 class DishesAdd(SuccessMessageMixin, CreateView):
