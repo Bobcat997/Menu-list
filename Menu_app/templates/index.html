@@ -186,18 +186,37 @@
         {% endfor %}
 
     </table>
-    <nav aria-label="Page navigation example">
+    <nav>
+        {% if page_obj.has_other_pages %}
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            </li>
+            <li class="page-item"><a class="page-link" href="?page=1"">First</a></li>
+            <li class=" page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i
+                            class="fas fa-angle-double-left"></i></a></li>
             {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only"></span></span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+
             {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a></li>
+
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i
+                        class="fas fa-angle-double-right"></i></a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
             {% endif %}
         </ul>
+        {% endif %}
+
+
+
+
+
     </nav>
 
 </html>
+<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Next</a></li>

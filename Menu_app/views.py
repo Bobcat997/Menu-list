@@ -8,14 +8,14 @@ from django.urls import reverse
 # old approach
 
 
-def index(request):
-    if request.method == 'GET':
-        query = request.GET.get('query')
-        if query:
-            menus = models.Menu.objects.filter(name__icontains=query)
-        else:
-            menus = models.Menu.objects.all()
-        return render(request, 'index.html', {"menus": menus, })
+# def index(request):
+#     if request.method == 'GET':
+#         query = request.GET.get('query')
+#         if query:
+#             menus = models.Menu.objects.filter(name__icontains=query)
+#         else:
+#             menus = models.Menu.objects.all()
+#         return render(request, 'index.html', {"menus": menus, })
 
 
 # def menu_add(request):
