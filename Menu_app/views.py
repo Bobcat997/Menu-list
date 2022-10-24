@@ -73,7 +73,7 @@ class Index(ListView):
     model = models.Menu
     context_object_name = 'menus'
     template_name = 'index.html'
-    paginate_by = 5
+    paginate_by = 1
 
     def get_queryset(self):
         q = self.request.GET.get('q')
